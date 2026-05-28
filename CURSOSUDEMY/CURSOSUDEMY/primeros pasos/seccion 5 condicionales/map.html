@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Map y Reduce de Películas</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+        // 1. Declaración de los objetos (películas)
+        var pelicula1 = { titulo : "La monja", anio: 2018, valoracion : 4 };
+        var pelicula2 = { titulo : "Anabelle", anio: 2014, valoracion : 3 };
+        var pelicula3 = { titulo : "Anabelle 2", anio: 2017, valoracion : 5 };
+        var pelicula4 = { titulo : "El conjuro", anio: 2013, valoracion : 5 };
+        var pelicula5 = { titulo : "El conjuro 2", anio: 2016, valoracion : 3 };
+
+        var peliculas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5];
+
+        
+        let nuevoObjeto = ({ valoracion }) => {
+            // Si la valoración es >= 5 le suma 1, si no, le suma 0
+            valoracion >= 5 ? valoracion += 1 : valoracion += 0;
+            
+            let objeto = {};
+            objeto["valoracion"] = valoracion;
+            return objeto;
+        }; 
+
+        let miNuevaValoracion = peliculas.map(nuevoObjeto);
+        console.log("Resultado del MAP (Nuevos objetos):", miNuevaValoracion);
+
+
+        let reducirValoracion = (acum, { valoracion }) => acum + valoracion;
+
+        let miTotalValoracion = peliculas.reduce(reducirValoracion, 0);
+        console.log("Resultado del REDUCE (Suma total de valoraciones originales):", miTotalValoracion);
+
+        let sumarValoracion = ({ valoracion }) => valoracion >= 5 ? valoracion + 1 : valoracion;
+        
+    </script>
+
+</body>
+</html>
